@@ -19,28 +19,29 @@ namespace Storage
         {
             Debug.WriteLine("C'est dans la db que je mets " + alain.ToString());
         }
-        public static int StoreDbResult()
+        public static void StoreDbResult()
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                using (MySqlCommand command = new MySqlCommand(selection))
+                using (MySqlCommand command = new MySqlCommand(selection, connection)) // Associez la connexion à la commande ici
                 {
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             // Traitez chaque ligne de résultat ici.
-                            // Vous pouvez accéder aux colonnes par leur nom ou leur indice./
+                            // Vous pouvez accéder aux colonnes par leur nom ou leur indice.
                             string nom = reader.GetString("jouPseudo");
-                            points = reader.GetInt32("jouNombrePoints");
-
+                            int points = reader.GetInt32("jouNombrePoints");
+                            Console.WriteLine(nom + " score: " +points);
                         }
                     }
                 }
                 connection.Close();
             }
-            return points;
+             
         }
+
     }
 }

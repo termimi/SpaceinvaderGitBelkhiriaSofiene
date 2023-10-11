@@ -51,7 +51,29 @@ do
         Console.ForegroundColor = ConsoleColor.White;
         break; // Sort de la boucle si Enter est pressé et le choix vaut 0
     }
+    if(keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 1)
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        break; // Sort de la boucle si Enter est pressé et le choix vaut 0
+    }
 } while (true);
+if (menu.choix1 ==1)
+{
+    while (true)
+    {
+        Console.Clear();
+        for(int i =0; i<5; i++)
+        {
+            Console.SetCursorPosition(0, i);
+            Store.StoreDbResult();
+            while (true) 
+            { 
+
+            }
+        }
+    }
+  
+}
 while (true)
 {
     Console.Clear();
