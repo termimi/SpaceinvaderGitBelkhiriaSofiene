@@ -168,6 +168,10 @@ while (true)
             {
                 alain.MoveRight();
                 alain.moveLeft();
+                if(alain.alienY == Console.WindowHeight - 4)
+                {
+                    player1.playerDead = true;
+                }
             }
         }
         Random randomSpeedFire = new Random();
@@ -252,8 +256,9 @@ while (true)
         if (player1.playerDead)
         {
             Console.Clear();
-            while (true)
+            while (player1.playerDead)
             {
+                
                 if (Console.KeyAvailable)
                 {
                     keyPressed = Console.ReadKey(true);

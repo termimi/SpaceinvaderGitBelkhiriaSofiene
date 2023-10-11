@@ -8,8 +8,9 @@ namespace Model
 {
     public class Alien
     {
+        
+        // Variable indiquant si la methode d'affichage de l'alien mort est fini
         public bool deadDrawPassed;
-        public bool dead;
         /// <summary>
         /// Liste contenant les missiles qui sont charger dans l'alien
         /// </summary>
@@ -39,7 +40,6 @@ namespace Model
         {
             this.alienX = alienX;
             this.alienY = alienY;
-            this.dead = false;
             this.deadDrawPassed = false;
         }
         /// <summary>

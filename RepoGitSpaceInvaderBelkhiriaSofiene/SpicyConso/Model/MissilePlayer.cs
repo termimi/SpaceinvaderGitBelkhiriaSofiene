@@ -11,6 +11,7 @@ namespace Model
     {
         public MissilePlayer(Player player)
         {
+            //Position du missile en fonction du joueur
             this.missileX = player.playerX + 2;
             this.missileY = player.playerY;
             this.missileLaunched = missileLaunched;

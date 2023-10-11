@@ -8,6 +8,9 @@
             this.missileY = alien.alienY;
             this.missileLaunched = missileLaunched;
         }
+        /// <summary>
+        /// Nouvelle forme de MissileUpdate qui envoie le missile vers le bas 
+        /// </summary>
         public override void MissileUpdate()
         {
             missileY++;
