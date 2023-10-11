@@ -2,6 +2,56 @@
 using Model;
 using Storage;
 
+
+Console.CursorVisible = false;
+Menu menu = new Menu();
+ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+do
+{
+    if (Console.KeyAvailable)
+    {
+        keyPressed = Console.ReadKey(true);
+        switch (keyPressed.Key)
+        {
+            case ConsoleKey.W:
+                menu.choix1--;
+                if (menu.choix1 < 0)
+                {
+                    menu.choix1 = 1;
+                }
+                break;
+            case ConsoleKey.S:
+                menu.choix1++;
+                if (menu.choix1 > 1)
+                {
+                    menu.choix1 = 0;
+                }
+                break;
+
+        }
+    }
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    menu.DrawTitle();
+    menu.DrawJouer();
+    menu.DrawClassemnt();
+    if (menu.choix1 == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        menu.DrawJouer();
+    }
+    if (menu.choix1 == 1)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        menu.DrawClassemnt();
+
+    }
+    if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        break; // Sort de la boucle si Enter est pressé et le choix vaut 0
+    }
+} while (true);
 while (true)
 {
     Console.Clear();
@@ -9,6 +59,7 @@ while (true)
     int clearInterval = 8;
     bool spawn = true;
     int manche = 1;
+    Store.score = 0;
 
 
 
@@ -16,66 +67,14 @@ while (true)
     Player player1 = new Player(76, Playground.SCREEN_HEIGHT - 4);
     List<MissilePlayer> missilePlayer = new List<MissilePlayer>();
     List<MissileAlien> missileAliens = new List<MissileAlien>();
-    Menu menu = new Menu();
+    
     GameOverMenu gameOver = new GameOverMenu();
 
-    ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+   
     Playground.Init();
 
-    do
-    {
-        if (Console.KeyAvailable)
-        {
-            keyPressed = Console.ReadKey(true);
-            switch (keyPressed.Key)
-            {
-                case ConsoleKey.W:
-                    menu.choix1--;
-                    if (menu.choix1 < 0)
-                    {
-                        menu.choix1 = 1;
-                    }
-                    break;
-                case ConsoleKey.S:
-                    menu.choix1++;
-                    if (menu.choix1 > 1)
-                    {
-                        menu.choix1 = 0;
-                    }
-                    break;
-
-            }
-        }
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        menu.DrawTitle();
-        menu.DrawJouer();
-        menu.DrawClassemnt();
-        if (menu.choix1 == 0)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            menu.DrawJouer();
-        }
-        if (menu.choix1 == 1)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            menu.DrawClassemnt();
-
-        }
-        if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 0)
-        {
-            Console.ForegroundColor = ConsoleColor.White;
-            break; // Sort de la boucle si Enter est pressé et le choix vaut 0
-        }
-    } while (true);
-    if (player1.playerDead)
-    {
-        while (true)
-        {
-            gameOver.DrawTitle();
-        }
-    }
-
+    
+    
     while (true)
     {
         if (spawn)
@@ -227,6 +226,7 @@ while (true)
             if (frameNumber % 5 == 0)
                 munitionDefaut.MissileUpdate();
             player1.PlayerTouched(munitionDefaut);
+          
 
         }
         for (int i = missileAliens.Count - 1; i >= 0; i--)
@@ -247,50 +247,64 @@ while (true)
             foreach (Alien alain in enemi)
                 Store.StoreAlien(alain);
         }
-            
+        if (player1.playerDead)
+        {
+            break;
+        }
 
         // Timing
         Thread.Sleep(3);
-
-
-        if (player1.playerDead)
+    }
+    if (player1.playerDead)
+    {
+        Console.Clear();
+        while (player1.playerDead)
         {
-            Console.Clear();
-            while (player1.playerDead)
-            {
-                
-                if (Console.KeyAvailable)
-                {
-                    keyPressed = Console.ReadKey(true);
-                    switch (keyPressed.Key)
-                    {
-                        case ConsoleKey.W:
-                            menu.choix1--;
-                            if (gameOver.choix1 < 0)
-                            {
-                                gameOver.choix1 = 1;
-                            }
-                            break;
-                        case ConsoleKey.S:
-                            gameOver.choix1++;
-                            if (gameOver.choix1 > 1)
-                            {
-                                gameOver.choix1 = 0;
-                            }
-                            break;
-                            
 
-                    }
-                }
-                Console.ForegroundColor = ConsoleColor.Red;
-                gameOver.DrawTitle();
-                Console.SetCursorPosition((Console.WindowWidth / 3), 25);
-                Console.Write($"Votre score: {Store.score}");
-                if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 0)
+            if (Console.KeyAvailable)
+            {
+                keyPressed = Console.ReadKey(true);
+                switch (keyPressed.Key)
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    break; // Sort de la boucle si Enter est pressé et le choix vaut 0
+                    case ConsoleKey.W:
+                        gameOver.choix1--;
+                        if (gameOver.choix1 < 0)
+                        {
+                            gameOver.choix1 = 1;
+                        }
+                        break;
+                    case ConsoleKey.S:
+                        gameOver.choix1++;
+                        if (gameOver.choix1 > 1)
+                        {
+                            gameOver.choix1 = 0;
+                        }
+                        break;
+
+
                 }
+            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            gameOver.DrawTitle();
+            gameOver.DrawRecommencer();
+            gameOver.DrawQuitter();
+            Console.SetCursorPosition((Console.WindowWidth / 3), 35);
+            Console.Write($"Votre score: {Store.score}");
+            if (gameOver.choix1 == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                gameOver.DrawRecommencer();
+            }
+            if (gameOver.choix1 == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                gameOver.DrawQuitter();
+            }
+            if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                player1.playerDead = false;
+                break; // Sort de la boucle si Enter est pressé et le choix vaut 0
             }
         }
     }
