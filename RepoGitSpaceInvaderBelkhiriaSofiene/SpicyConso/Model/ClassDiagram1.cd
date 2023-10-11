@@ -3,7 +3,7 @@
   <Class Name="Model.Alien" Collapsed="true">
     <Position X="7.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CEAAAgAAAAAAAAAQAAAQQAAAABAAAAAIQAAACAAAAAA=</HashCode>
+      <HashCode>CEAAAgAAAAAAAAAQAAAQQAAAABAAAAAAQAAACAAAAAA=</HashCode>
       <FileName>Alien.cs</FileName>
     </TypeIdentifier>
   </Class>

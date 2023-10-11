@@ -219,7 +219,7 @@ while (true)
             MissilePlayer munitionNormal1 = missilePlayer[i];
             if (munitionNormal1.missileTouched)
             {
-                missilePlayer.RemoveAt(i);
+                missilePlayer.RemoveAt(i); 
             }
         }
         foreach (MissileAlien munitionDefaut in missileAliens)
