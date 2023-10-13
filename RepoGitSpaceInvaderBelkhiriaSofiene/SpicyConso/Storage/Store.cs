@@ -10,18 +10,23 @@ using MySql.Data.MySqlClient;
 namespace Storage
 {
     public class Store
-    {
-        static List<Scores> fiveBestScore = new List<Scores>();
-        
+    {        
+        public List<Store> storageScore = new List<Store>();
         public  int score = 0;
         public  string connectionString = "Server=localhost;Port=6033;Database=db_space_invaders;User=root;Password=root;";
         public  string selection = "SELECT * FROM t_joueur ORDER BY jouNombrePoints DESC LIMIT 5;";
         public  int points;
+        public string name;
+        public Store(string name, int point)
+        {
+            this.name = name;
+            this.points = point;
+        }
         public  void StoreAlien(Alien alain)
         {
             Debug.WriteLine("C'est dans la db que je mets " + alain.ToString());
         }
-        public  void StoreDbResult(Scores fiveScore)
+        public  void StoreDbResult()
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -36,8 +41,9 @@ namespace Storage
                             // Vous pouvez accéder aux colonnes par leur nom ou leur indice.
                             string nom = reader.GetString("jouPseudo");
                             int points = reader.GetInt32("jouNombrePoints");
-                            Scores scoreDB = new Scores(nom,points);
-                            fiveBestScore.Add(scoreDB);
+                            Store record = new Store(nom,points);
+                           this.storageScore.Add(record);
+
                         }
                     }
                 }
@@ -45,14 +51,17 @@ namespace Storage
             }
              
         }
-        public  void LoadingDbResult()
+        public List<Store> LoadingDbResult()
         {
-            foreach(Scores scores in fiveBestScore)
+            List<Store> storageScore2 = new List<Store>();
+            foreach (Store record in storageScore)
             {
-
+                storageScore2.Add(record);
             }
+            return storageScore2;
         }
-        
+
+
 
     }
 }

@@ -5,7 +5,8 @@ using Storage;
 
 Console.CursorVisible = false;
 Menu menu = new Menu();
-List<Scores> scores = new List<Scores>();
+//List<Store> scoresList = new List<Store>();
+Store scores = new Store("", 0);
 ConsoleKeyInfo keyPressed = Console.ReadKey(true);
 do
 {
@@ -66,7 +67,14 @@ if (menu.choix1 ==1)
         for(int i =0; i<5; i++)
         {
             Console.SetCursorPosition(0, i);
-            
+            scores.StoreDbResult();
+            List<Store> scoresList = scores.LoadingDbResult();
+            foreach(Store store in scoresList)
+            {
+                Console.WriteLine(store.name + " " + store.points);
+            }
+
+
             while (true) 
             { 
 
@@ -82,7 +90,7 @@ while (true)
     int clearInterval = 8;
     bool spawn = true;
     int manche = 1;
-    Store.score = 0;
+    scores.score = 0;
 
 
 
@@ -161,7 +169,7 @@ while (true)
         {
             Playground.Clear();
             Playground.DrawInGameMenu();
-            Playground.DrawScoreInGameMenu(Store.score);
+            Playground.DrawScoreInGameMenu(scores.score);
             Playground.DrawMancheInGameMenu(manche);
             foreach (Alien alain in enemi)
             {
@@ -226,7 +234,7 @@ while (true)
                 Alien alain = enemi[i];
                 if (alain.alienDead && alain.deadDrawPassed)
                 {
-                    Store.score += 100;
+                    scores.score += 100;
                     enemi.RemoveAt(i);
                 }
                 if (enemi.Count == 0)
@@ -268,7 +276,7 @@ while (true)
         if (frameNumber % 1000 == 0)
         {
             foreach (Alien alain in enemi)
-                Store.StoreAlien(alain);
+                scores.StoreAlien(alain);
         }
         if (player1.playerDead)
         {
@@ -312,7 +320,7 @@ while (true)
             gameOver.DrawRecommencer();
             gameOver.DrawQuitter();
             Console.SetCursorPosition((Console.WindowWidth / 3), 35);
-            Console.Write($"Votre score: {Store.score}");
+            Console.Write($"Votre score: {scores.score}");
             if (gameOver.choix1 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
