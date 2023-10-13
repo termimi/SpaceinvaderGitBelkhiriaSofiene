@@ -75,8 +75,6 @@ namespace Storage
                     connection.Open();
 
                     // Utilisez des paramètres dans la requête pour éviter les injections SQL.
-
-
                     using (MySqlCommand command = new MySqlCommand(insertInTo, connection))
                     {
                         command.Parameters.AddWithValue("@jouPseudo", this.name);
@@ -96,10 +94,6 @@ namespace Storage
                     connection.Close();
                 }
             }
-
-
-
-
         }
     }
 }

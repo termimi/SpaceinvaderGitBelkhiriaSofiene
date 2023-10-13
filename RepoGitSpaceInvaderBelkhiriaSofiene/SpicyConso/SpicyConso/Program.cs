@@ -9,7 +9,7 @@ Menu menu = new Menu();
 Store scores = new Store("", 0);
 ConsoleKeyInfo keyPressed = Console.ReadKey(true);
 // indique si le joueur veut partire de la page score ou non
-bool escapeScore = false;
+bool escape = false;
 
 // Menu de base du jeu 
 
@@ -95,16 +95,16 @@ do
                     }
                     if (menu.choix1 == 10 && keyPressed.Key == ConsoleKey.Escape)
                     {
-                        escapeScore = true;
+                        escape = true;
                         menu.choix1 = 0;
                         break;
                     }
                 }
 
             }
-            if (escapeScore)
+            if (escape)
             {
-                escapeScore = false;
+                escape = false;
                 Console.Clear();
                 break;
             }
@@ -267,7 +267,7 @@ while (true)
                 Alien alain = enemi[i];
                 if (alain.alienDead && alain.deadDrawPassed)
                 {
-                    scores.score += 1000;
+                    scores.score += 100;
                     enemi.RemoveAt(i);
                 }
                 if (enemi.Count == 0)
@@ -392,9 +392,28 @@ while (true)
                     scores.sendScoreToDB();
                     while (true)
                     {
-                        /// fair en sorte de re voir le menu game over afin de recommencer
+                        if (Console.KeyAvailable)
+                        {
+                            keyPressed = Console.ReadKey(true);
+                            switch (keyPressed.Key)
+                            {
+                                case ConsoleKey.Escape:
+                                  gameOver.choix1 = 10;
+                                    break;
+                            }
+                        }
+                        if(gameOver.choix1 == 10)
+                        {
+                            gameOver.choix1 = 0;
+                            escape = true;
+                            break;
+                        }
                     }
-
+                    if (escape)
+                    {
+                        Console.Clear();
+                        break;
+                    }
                 }
             }
         }
