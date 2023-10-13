@@ -33,7 +33,7 @@ namespace Storage
                 try
                 {
                     connection.Open();
-
+                    this.storageScore.Clear();
                     using (MySqlCommand command = new MySqlCommand(selection, connection))
                     {
                         using (MySqlDataReader reader = command.ExecuteReader())

@@ -14,7 +14,7 @@ bool escapeScore = false;
 // Menu de base du jeu 
 
 do
-{ 
+{
     if (Console.KeyAvailable)
     {
         keyPressed = Console.ReadKey(true);
@@ -58,7 +58,7 @@ do
         Console.ForegroundColor = ConsoleColor.White;
         break; // Sort de la boucle si Enter est pressé et le choix vaut 0
     }
-    if(keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 1)
+    if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 1)
     {
         Console.ForegroundColor = ConsoleColor.White;
         // Sort de la boucle si Enter est pressé et le choix vaut 0
@@ -68,43 +68,39 @@ do
 
     if (menu.choix1 == 1 && keyPressed.Key == ConsoleKey.Enter)
     {
+        // prend en compe la position y des scores 
+        int i = 0;
         while (true)
         {
             Console.Clear();
-            for (int i = 0; i < 5; i++)
+            Console.SetCursorPosition(0, i);
+            i++;
+            scores.StoreDbResult();
+            List<Store> scoresList = scores.LoadingDbResult();
+            foreach (Store store in scoresList)
             {
-                Console.SetCursorPosition(0, i);
-                scores.StoreDbResult();
-                List<Store> scoresList = scores.LoadingDbResult();
-                foreach (Store store in scoresList)
-                {
-                    Console.WriteLine(store.name + " " + store.points);
-                }
+                Console.WriteLine(store.name + " " + store.points);
+            }
 
-                while (true)
+            while (true)
+            {
+                if (Console.KeyAvailable)
                 {
-                    if (Console.KeyAvailable)
+                    keyPressed = Console.ReadKey(true);
+                    switch (keyPressed.Key)
                     {
-                        keyPressed = Console.ReadKey(true);
-                        switch (keyPressed.Key)
-                        {
-                            case ConsoleKey.Escape:
-                                menu.choix1 = 10;
-                                break;
-                        }
-                        if (menu.choix1 == 10 && keyPressed.Key == ConsoleKey.Escape)
-                        {
-                            escapeScore = true;
-                            menu.choix1 = 0;
+                        case ConsoleKey.Escape:
+                            menu.choix1 = 10;
                             break;
-                        }
                     }
+                    if (menu.choix1 == 10 && keyPressed.Key == ConsoleKey.Escape)
+                    {
+                        escapeScore = true;
+                        menu.choix1 = 0;
+                        break;
+                    }
+                }
 
-                }
-                if (escapeScore)
-                {
-                   break;
-                }
             }
             if (escapeScore)
             {
@@ -113,11 +109,13 @@ do
                 break;
             }
         }
-
+       
     }
-} while (true);
 
-// Boucle du jeu
+
+} while (true) ;
+
+//Boucle du jeu
 while (true)
 {
     Console.Clear();
@@ -133,14 +131,14 @@ while (true)
     Player player1 = new Player(76, Playground.SCREEN_HEIGHT - 4);
     List<MissilePlayer> missilePlayer = new List<MissilePlayer>();
     List<MissileAlien> missileAliens = new List<MissileAlien>();
-    
+
     GameOverMenu gameOver = new GameOverMenu();
 
-   
+
     Playground.Init();
 
-    
-    
+
+
     while (true)
     {
         if (spawn)
@@ -155,7 +153,7 @@ while (true)
                 {
                     x = c * 13;
                     c++;
-                    if(i%10 ==0)
+                    if (i % 10 == 0)
                     {
                         y += 10;
                     }
@@ -233,7 +231,7 @@ while (true)
             {
                 alain.MoveRight();
                 alain.moveLeft();
-                if(alain.alienY == Console.WindowHeight - 4)
+                if (alain.alienY == Console.WindowHeight - 4)
                 {
                     player1.playerDead = true;
                 }
@@ -279,12 +277,12 @@ while (true)
                 }
             }
         }
-        for(int i = missilePlayer.Count -1; i>=0; i--)
+        for (int i = missilePlayer.Count - 1; i >= 0; i--)
         {
             MissilePlayer munitionNormal1 = missilePlayer[i];
             if (munitionNormal1.missileTouched)
             {
-                missilePlayer.RemoveAt(i); 
+                missilePlayer.RemoveAt(i);
             }
         }
         foreach (MissileAlien munitionDefaut in missileAliens)
@@ -292,7 +290,7 @@ while (true)
             if (frameNumber % 5 == 0)
                 munitionDefaut.MissileUpdate();
             player1.PlayerTouched(munitionDefaut);
-          
+
 
         }
         for (int i = missileAliens.Count - 1; i >= 0; i--)
@@ -303,7 +301,7 @@ while (true)
 
                 missileAliens.RemoveAt(i);
             }
-            if(munitionDefaut1.missileTouched)
+            if (munitionDefaut1.missileTouched)
                 missileAliens.RemoveAt(i);
         }
 
