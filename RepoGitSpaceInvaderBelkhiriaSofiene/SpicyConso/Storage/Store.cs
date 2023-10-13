@@ -30,26 +30,35 @@ namespace Storage
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                connection.Open();
-                using (MySqlCommand command = new MySqlCommand(selection, connection)) // Associez la connexion à la commande ici
+                try
                 {
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            // Traitez chaque ligne de résultat ici.
-                            // Vous pouvez accéder aux colonnes par leur nom ou leur indice.
-                            string nom = reader.GetString("jouPseudo");
-                            int points = reader.GetInt32("jouNombrePoints");
-                            Store record = new Store(nom,points);
-                           this.storageScore.Add(record);
+                    connection.Open();
 
+                    using (MySqlCommand command = new MySqlCommand(selection, connection))
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string nom = reader.GetString("jouPseudo");
+                                int points = reader.GetInt32("jouNombrePoints");
+                                Store record = new Store(nom, points);
+                                this.storageScore.Add(record);
+                            }
                         }
                     }
                 }
-                connection.Close();
+                catch (MySqlException ex)
+                {
+                     Console.WriteLine("La connexion à la base de donnée n'a pas pu être établie : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close(); 
+                }
             }
-             
+
+
         }
         public List<Store> LoadingDbResult()
         {

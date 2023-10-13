@@ -8,8 +8,13 @@ Menu menu = new Menu();
 //List<Store> scoresList = new List<Store>();
 Store scores = new Store("", 0);
 ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+// indique si le joueur veut partire de la page score ou non
+bool escapeScore = false;
+
+// Menu de base du jeu 
+
 do
-{
+{ 
     if (Console.KeyAvailable)
     {
         keyPressed = Console.ReadKey(true);
@@ -56,32 +61,63 @@ do
     if(keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 1)
     {
         Console.ForegroundColor = ConsoleColor.White;
-        break; // Sort de la boucle si Enter est pressé et le choix vaut 0
+        // Sort de la boucle si Enter est pressé et le choix vaut 0
     }
-} while (true);
-if (menu.choix1 ==1)
-{
-    while (true)
+
+    //Menu du score affichant le score
+
+    if (menu.choix1 == 1 && keyPressed.Key == ConsoleKey.Enter)
     {
-        Console.Clear();
-        for(int i =0; i<5; i++)
+        while (true)
         {
-            Console.SetCursorPosition(0, i);
-            scores.StoreDbResult();
-            List<Store> scoresList = scores.LoadingDbResult();
-            foreach(Store store in scoresList)
+            Console.Clear();
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine(store.name + " " + store.points);
+                Console.SetCursorPosition(0, i);
+                scores.StoreDbResult();
+                List<Store> scoresList = scores.LoadingDbResult();
+                foreach (Store store in scoresList)
+                {
+                    Console.WriteLine(store.name + " " + store.points);
+                }
+
+                while (true)
+                {
+                    if (Console.KeyAvailable)
+                    {
+                        keyPressed = Console.ReadKey(true);
+                        switch (keyPressed.Key)
+                        {
+                            case ConsoleKey.Escape:
+                                menu.choix1 = 10;
+                                break;
+                        }
+                        if (menu.choix1 == 10 && keyPressed.Key == ConsoleKey.Escape)
+                        {
+                            escapeScore = true;
+                            menu.choix1 = 0;
+                            break;
+                        }
+                    }
+
+                }
+                if (escapeScore)
+                {
+                   break;
+                }
             }
-
-            while (true) 
-            { 
-
+            if (escapeScore)
+            {
+                escapeScore = false;
+                Console.Clear();
+                break;
             }
         }
+
     }
-  
-}
+} while (true);
+
+// Boucle du jeu
 while (true)
 {
     Console.Clear();
@@ -330,11 +366,15 @@ while (true)
                 Console.ForegroundColor = ConsoleColor.Green;
                 gameOver.DrawQuitter();
             }
-            if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 0)
+            if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 player1.playerDead = false;
                 break; // Sort de la boucle si Enter est pressé et le choix vaut 0
+            }
+            if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 1)
+            {
+                Environment.Exit(0);
             }
         }
     }
