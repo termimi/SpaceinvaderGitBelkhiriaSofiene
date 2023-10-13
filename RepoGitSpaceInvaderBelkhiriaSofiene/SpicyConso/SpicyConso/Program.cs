@@ -267,7 +267,7 @@ while (true)
                 Alien alain = enemi[i];
                 if (alain.alienDead && alain.deadDrawPassed)
                 {
-                    scores.score += 100;
+                    scores.score += 1000;
                     enemi.RemoveAt(i);
                 }
                 if (enemi.Count == 0)
@@ -388,6 +388,7 @@ while (true)
                     Console.Write("Merci de me donner votre pseudo puis d'appuier sur enter: ");
                     string nomJoueur = Console.ReadLine();
                     scores.name = nomJoueur;
+                    scores.sendScoreToDB();
                     Console.WriteLine();
                     Console.Write("Votre score et votre pseudo ont été envoyer");
                     while (true)

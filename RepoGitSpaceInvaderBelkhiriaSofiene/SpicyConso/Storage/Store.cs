@@ -10,23 +10,24 @@ using MySql.Data.MySqlClient;
 namespace Storage
 {
     public class Store
-    {        
+    {
         public List<Store> storageScore = new List<Store>();
-        public  int score = 0;
-        public  string connectionString = "Server=localhost;Port=6033;Database=db_space_invaders;User=root;Password=root;";
-        public  string selection = "SELECT * FROM t_joueur ORDER BY jouNombrePoints DESC LIMIT 5;";
-        public  int points;
+        public int score = 0;
+        public string connectionString = "Server=localhost;Port=6033;Database=db_space_invaders;User=root;Password=root;";
+        public string selection = "SELECT * FROM t_joueur ORDER BY jouNombrePoints DESC LIMIT 5;";
+        public string insertInTo = "INSERT INTO t_joueur(jouPseudo, jouNombrePoints) VALUES(@jouPseudo, @jouNombrePoints)";
+        public int points;
         public string name;
         public Store(string name, int point)
         {
             this.name = name;
             this.points = point;
         }
-        public  void StoreAlien(Alien alain)
+        public void StoreAlien(Alien alain)
         {
             Debug.WriteLine("C'est dans la db que je mets " + alain.ToString());
         }
-        public  void StoreDbResult()
+        public void StoreDbResult()
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -50,11 +51,11 @@ namespace Storage
                 }
                 catch (MySqlException ex)
                 {
-                     Console.WriteLine("La connexion à la base de donnée n'a pas pu être établie : " + ex.Message);
+                    Console.WriteLine("La connexion à la base de donnée n'a pas pu être établie : " + ex.Message);
                 }
                 finally
                 {
-                    connection.Close(); 
+                    connection.Close();
                 }
             }
 
@@ -69,8 +70,28 @@ namespace Storage
             }
             return storageScore2;
         }
+        public void sendScoreToDB()
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // Utilisez des paramètres dans la requête pour éviter les injections SQL.
+
+
+                using (MySqlCommand command = new MySqlCommand(insertInTo, connection))
+                {
+                    command.Parameters.AddWithValue("@jouPseudo", this.name);
+                    command.Parameters.AddWithValue("@jouNombrePoints", this.score);
+
+                    command.ExecuteNonQuery(); // Exécutez la requête d'insertion.
+                }
+
+                connection.Close();
+            }
 
 
 
+        }
     }
 }
