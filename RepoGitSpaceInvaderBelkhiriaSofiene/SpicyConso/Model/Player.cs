@@ -35,7 +35,7 @@ namespace Model
             //positionne le joueur tout à gauche de la map si il atteint 
             if (playerX == Console.WindowWidth - 27)
             {
-                playerX = 12;
+                playerX = 13;
             }
         }
         /// <summary>
@@ -46,7 +46,7 @@ namespace Model
             playerX--;
             if (playerX == 12)
             {
-                playerX = Console.WindowWidth-27;
+                playerX = Console.WindowWidth-28;
             }
         }
         /// <summary>
