@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model;
+﻿using Model;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace Storage
 {
@@ -72,23 +67,36 @@ namespace Storage
         }
         public void sendScoreToDB()
         {
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                connection.Open();
-
-                // Utilisez des paramètres dans la requête pour éviter les injections SQL.
-
-
-                using (MySqlCommand command = new MySqlCommand(insertInTo, connection))
+                try
                 {
-                    command.Parameters.AddWithValue("@jouPseudo", this.name);
-                    command.Parameters.AddWithValue("@jouNombrePoints", this.score);
+                    connection.Open();
 
-                    command.ExecuteNonQuery(); // Exécutez la requête d'insertion.
+                    // Utilisez des paramètres dans la requête pour éviter les injections SQL.
+
+
+                    using (MySqlCommand command = new MySqlCommand(insertInTo, connection))
+                    {
+                        command.Parameters.AddWithValue("@jouPseudo", this.name);
+                        command.Parameters.AddWithValue("@jouNombrePoints", this.score);
+
+                        command.ExecuteNonQuery(); // Exécutez la requête d'insertion.
+                    }
+
+
                 }
-
-                connection.Close();
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine("La connexion à la base de donnée n'a pas pu être établie : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
+
 
 
 
