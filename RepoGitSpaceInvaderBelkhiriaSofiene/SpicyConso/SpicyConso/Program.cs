@@ -5,6 +5,7 @@ using Storage;
 
 Console.CursorVisible = false;
 Menu menu = new Menu();
+List<Scores> scores = new List<Scores>();
 ConsoleKeyInfo keyPressed = Console.ReadKey(true);
 do
 {
@@ -65,7 +66,7 @@ if (menu.choix1 ==1)
         for(int i =0; i<5; i++)
         {
             Console.SetCursorPosition(0, i);
-            Store.StoreDbResult();
+            
             while (true) 
             { 
 
