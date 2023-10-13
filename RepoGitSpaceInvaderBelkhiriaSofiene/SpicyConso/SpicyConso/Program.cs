@@ -74,7 +74,6 @@ if (menu.choix1 ==1)
                 Console.WriteLine(store.name + " " + store.points);
             }
 
-
             while (true) 
             { 
 
