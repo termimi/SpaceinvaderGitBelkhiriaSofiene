@@ -83,13 +83,13 @@ namespace Storage
                         command.Parameters.AddWithValue("@jouNombrePoints", this.score);
 
                         command.ExecuteNonQuery(); // Exécutez la requête d'insertion.
+                        Console.Write("Votre score et votre pseudo ont été envoyer");
                     }
-
-
                 }
                 catch (MySqlException ex)
                 {
                     Console.WriteLine("La connexion à la base de donnée n'a pas pu être établie : " + ex.Message);
+                    Console.WriteLine("Vos information n'ont pas pu être envoyer");
                 }
                 finally
                 {
