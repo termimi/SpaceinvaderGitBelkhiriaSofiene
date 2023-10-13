@@ -324,7 +324,7 @@ while (true)
         Console.Clear();
         while (player1.playerDead)
         {
-
+            Console.SetWindowSize(Playground.SCREEN_WIDTH, 60);
             if (Console.KeyAvailable)
             {
                 keyPressed = Console.ReadKey(true);
@@ -334,12 +334,12 @@ while (true)
                         gameOver.choix1--;
                         if (gameOver.choix1 < 0)
                         {
-                            gameOver.choix1 = 1;
+                            gameOver.choix1 = 2;
                         }
                         break;
                     case ConsoleKey.S:
                         gameOver.choix1++;
-                        if (gameOver.choix1 > 1)
+                        if (gameOver.choix1 > 2)
                         {
                             gameOver.choix1 = 0;
                         }
@@ -352,7 +352,8 @@ while (true)
             gameOver.DrawTitle();
             gameOver.DrawRecommencer();
             gameOver.DrawQuitter();
-            Console.SetCursorPosition((Console.WindowWidth / 3), 35);
+            gameOver.SendScore();
+            Console.SetCursorPosition((Console.WindowWidth / 3), 55);
             Console.Write($"Votre score: {scores.score}");
             if (gameOver.choix1 == 0)
             {
@@ -364,6 +365,11 @@ while (true)
                 Console.ForegroundColor = ConsoleColor.Green;
                 gameOver.DrawQuitter();
             }
+            if (gameOver.choix1 == 2)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                gameOver.SendScore();
+            }
             if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.White;
@@ -373,6 +379,23 @@ while (true)
             if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 1)
             {
                 Environment.Exit(0);
+            }
+            if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 2)
+            {
+                Console.Clear();
+                while (true)
+                {
+                    Console.Write("Merci de me donner votre pseudo puis d'appuier sur enter: ");
+                    string nomJoueur = Console.ReadLine();
+                    scores.name = nomJoueur;
+                    Console.WriteLine();
+                    Console.Write("Votre score et votre pseudo ont été envoyer");
+                    while (true)
+                    {
+                        /// fair en sorte de re voir le menu game over afin de recommencer
+                    }
+
+                }
             }
         }
     }

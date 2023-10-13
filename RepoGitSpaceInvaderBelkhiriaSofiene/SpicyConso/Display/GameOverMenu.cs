@@ -35,6 +35,16 @@ namespace Display
             @" | |__| | |_| | | |_| ||  __/ |   ",
             @"  \___\_\\__,_|_|\__|\__\___|_|   "
         };
+        public string[] sendScore =
+        {
+            @"   _____                _    _____                    ",
+            @"  / ____|              | |  / ____|                   ",
+            @" | (___   ___ _ __   __| | | (___   ___ ___  _ __ ___ ",
+            @"  \___ \ / _ \ '_ \ / _` |  \___ \ / __/ _ \| '__/ _ \",
+            @"  ____) |  __/ | | | (_| |  ____) | (_| (_) | | |  __/",
+            @" |_____/ \___|_| |_|\__,_| |_____/ \___\___/|_|  \___|"
+           
+        };
         public int choix1 = 0;
         public GameOverMenu()
         {
@@ -62,6 +72,14 @@ namespace Display
             {
                 Console.SetCursorPosition(Console.WindowWidth / 4, 25 + i);
                 Console.WriteLine(quitter[i]);
+            }
+        }
+        public void SendScore()
+        {
+            for (int i = 0; i < gameOver.Length; i++)
+            {
+                Console.SetCursorPosition(Console.WindowWidth / 4, 35 + i);
+                Console.WriteLine(sendScore[i]);
             }
         }
     }
