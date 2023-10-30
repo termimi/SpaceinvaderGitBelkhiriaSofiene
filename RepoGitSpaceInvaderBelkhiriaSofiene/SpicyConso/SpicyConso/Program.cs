@@ -5,16 +5,15 @@ using Storage;
 
 Console.CursorVisible = false;
 Menu menu = new Menu();
-//List<Store> scoresList = new List<Store>();
 Store scores = new Store("", 0);
 ConsoleKeyInfo keyPressed = Console.ReadKey(true);
 // indique si le joueur veut partire de la page score ou non
 bool escape = false;
 
 // Menu de base du jeu 
-
 do
 {
+    // Gère les choix du joueur
     if (Console.KeyAvailable)
     {
         keyPressed = Console.ReadKey(true);
@@ -34,10 +33,8 @@ do
                     menu.choix1 = 0;
                 }
                 break;
-
         }
     }
-
     Console.ForegroundColor = ConsoleColor.Green;
     menu.DrawTitle();
     menu.DrawJouer();
@@ -51,39 +48,41 @@ do
     {
         Console.ForegroundColor = ConsoleColor.Red;
         menu.DrawClassemnt();
-
     }
+    // Sort de la boucle si Enter est pressé et le choix vaut 0
     if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 0)
     {
         Console.ForegroundColor = ConsoleColor.White;
-        break; // Sort de la boucle si Enter est pressé et le choix vaut 0
+        break;
     }
+    // Sort de la boucle si Enter est pressé et le choix vaut 1
     if (keyPressed.Key == ConsoleKey.Enter && menu.choix1 == 1)
     {
         Console.ForegroundColor = ConsoleColor.White;
-        // Sort de la boucle si Enter est pressé et le choix vaut 0
     }
 
     //Menu du score affichant le score
 
     if (menu.choix1 == 1 && keyPressed.Key == ConsoleKey.Enter)
     {
-        // prend en compe la position y des scores 
+        // la position y des scores 
         int i = 5;
+        // Affichage des scores
         while (true)
         {
             Console.Clear();
-
-
+            // Prend les 5 meilleurs joueurs
             scores.StoreDbResult();
+            // attribue le résulat de loadingDbResult à une nouvelle liste 
             List<Store> scoresList = scores.LoadingDbResult();
+            //Affiche le nom et les point de la liste scoreList
             foreach (Store store in scoresList)
             {
                 Console.SetCursorPosition(Console.WindowWidth / 2, i);
                 Console.WriteLine(store.strName + " " + store.intPoints);
                 i++;
             }
-
+            // Bloque l'affichage du score 
             while (true)
             {
                 if (Console.KeyAvailable)
@@ -104,6 +103,7 @@ do
                 }
 
             }
+            // sors du menu score 
             if (escape)
             {
                 escape = false;
@@ -123,11 +123,12 @@ while (true)
     Console.Clear();
     uint frameNumber = 0; // count the number of frames displayed
     int clearInterval = 8;
+    // indique si les ennemis peuvent spawner ou non
     bool spawn = true;
+    // nombre de manche de la partie
     int manche = 1;
+    // score du joueur
     scores.intScore = 0;
-
-
 
     List<Alien> enemi = new List<Alien>();
     Player player1 = new Player(76, Playground.SCREEN_HEIGHT - 4);
@@ -143,11 +144,13 @@ while (true)
 
     while (true)
     {
+        // si les enemis peuvent spawner
         if (spawn)
         {
             int c = 0;
             int x;
             int y = 0;
+            // création des enemis
             for (int i = 0; i < manche * 3; i++)
             {
                 x = i * 13;
@@ -164,6 +167,7 @@ while (true)
                 enemi.Add(alain);
             }
         }
+        //Blockage du spawn des enemis 
         spawn = false;
 
         // Actions de l'utilisateur
@@ -213,22 +217,24 @@ while (true)
             }
             Playground.DrawPlayer(player1);
             Playground.DrawPlayerDead(player1);
+            // affichage des missiles du joueurs
             foreach (MissilePlayer munitionNormal in missilePlayer)
             {
                 Playground.DrawLaunchMissile(munitionNormal);
             }
+            // affichage des missiles des aliens
             foreach (MissileAlien munitionDefaut in missileAliens)
             {
-                //foreach (Alien alain in enemi)
                 Playground.DrawLaunchMissileAlien(munitionDefaut);
             }
         }
-
+        // augmente le nombre de frame 
         frameNumber++;
 
         // Déplacement au niveau du modèle (état)
         if (frameNumber % 3 == 0)
         {
+            // mouvement des aliens
             foreach (Alien alain in enemi)
             {
                 alain.MoveRight();
@@ -239,12 +245,13 @@ while (true)
                 }
             }
         }
+        // fais en sorte que le tire des aliens est aléatoire
         Random randomSpeedFire = new Random();
         if (frameNumber % 65 == 0)
         {
+            // tire des aliens
             foreach (Alien alain in enemi)
             {
-
                 int speedFire = randomSpeedFire.Next(5);
                 if (speedFire % 2 == 0)
                 {
@@ -253,9 +260,9 @@ while (true)
                     alain.ChargementAlien(munitionDefaut);
                     alain.MisilleLaunchAlien(munitionDefaut);
                 }
-
             }
         }
+
         foreach (MissilePlayer munitionNormal in missilePlayer)
         {
             if (frameNumber % 2 == 0)
