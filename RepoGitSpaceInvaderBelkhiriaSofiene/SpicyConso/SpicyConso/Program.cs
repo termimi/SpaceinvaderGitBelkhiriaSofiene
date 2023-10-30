@@ -69,17 +69,19 @@ do
     if (menu.choix1 == 1 && keyPressed.Key == ConsoleKey.Enter)
     {
         // prend en compe la position y des scores 
-        int i = 0;
+        int i = 5;
         while (true)
         {
             Console.Clear();
-            Console.SetCursorPosition(0, i);
-            i++;
+            
+            
             scores.StoreDbResult();
             List<Store> scoresList = scores.LoadingDbResult();
             foreach (Store store in scoresList)
             {
+                Console.SetCursorPosition(Console.WindowWidth / 2, i);
                 Console.WriteLine(store.name + " " + store.points);
+                i++;
             }
 
             while (true)
