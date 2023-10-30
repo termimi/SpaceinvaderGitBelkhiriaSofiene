@@ -73,14 +73,14 @@ do
         while (true)
         {
             Console.Clear();
-            
-            
+
+
             scores.StoreDbResult();
             List<Store> scoresList = scores.LoadingDbResult();
             foreach (Store store in scoresList)
             {
                 Console.SetCursorPosition(Console.WindowWidth / 2, i);
-                Console.WriteLine(store.name + " " + store.points);
+                Console.WriteLine(store.strName + " " + store.intPoints);
                 i++;
             }
 
@@ -111,11 +111,11 @@ do
                 break;
             }
         }
-       
+
     }
 
 
-} while (true) ;
+} while (true);
 
 //Boucle du jeu
 while (true)
@@ -125,7 +125,7 @@ while (true)
     int clearInterval = 8;
     bool spawn = true;
     int manche = 1;
-    scores.score = 0;
+    scores.intScore = 0;
 
 
 
@@ -204,7 +204,7 @@ while (true)
         {
             Playground.Clear();
             Playground.DrawInGameMenu();
-            Playground.DrawScoreInGameMenu(scores.score);
+            Playground.DrawScoreInGameMenu(scores.intScore);
             Playground.DrawMancheInGameMenu(manche);
             foreach (Alien alain in enemi)
             {
@@ -269,7 +269,7 @@ while (true)
                 Alien alain = enemi[i];
                 if (alain.alienDead && alain.deadDrawPassed)
                 {
-                    scores.score += 100;
+                    scores.intScore += 100;
                     enemi.RemoveAt(i);
                 }
                 if (enemi.Count == 0)
@@ -306,18 +306,10 @@ while (true)
             if (munitionDefaut1.missileTouched)
                 missileAliens.RemoveAt(i);
         }
-
-        // Autosave
-        if (frameNumber % 1000 == 0)
-        {
-            foreach (Alien alain in enemi)
-                scores.StoreAlien(alain);
-        }
         if (player1.playerDead)
         {
             break;
         }
-
         // Timing
         Thread.Sleep(3);
     }
@@ -356,7 +348,7 @@ while (true)
             gameOver.DrawQuitter();
             gameOver.SendScore();
             Console.SetCursorPosition((Console.WindowWidth / 3), 55);
-            Console.Write($"Votre score: {scores.score}");
+            Console.Write($"Votre score: {scores.intScore}");
             if (gameOver.choix1 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -389,7 +381,7 @@ while (true)
                 {
                     Console.Write("Merci de me donner votre pseudo puis d'appuier sur enter: ");
                     string nomJoueur = Console.ReadLine();
-                    scores.name = nomJoueur;
+                    scores.strName = nomJoueur;
                     Console.WriteLine();
                     scores.sendScoreToDB();
                     while (true)
@@ -400,11 +392,11 @@ while (true)
                             switch (keyPressed.Key)
                             {
                                 case ConsoleKey.Escape:
-                                  gameOver.choix1 = 10;
+                                    gameOver.choix1 = 10;
                                     break;
                             }
                         }
-                        if(gameOver.choix1 == 10)
+                        if (gameOver.choix1 == 10)
                         {
                             gameOver.choix1 = 0;
                             escape = true;
