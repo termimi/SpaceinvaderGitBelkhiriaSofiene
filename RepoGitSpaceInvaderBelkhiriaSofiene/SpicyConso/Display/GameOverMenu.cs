@@ -45,11 +45,15 @@ namespace Display
             @" |_____/ \___|_| |_|\__,_| |_____/ \___\___/|_|  \___|"
            
         };
+        // variable contenant le choix du joueur
         public int choix1 = 0;
         public GameOverMenu()
         {
             this.choix1 = 0;
         }
+        /// <summary>
+        /// Affiche la variable gameOver
+        /// </summary>
         public void DrawTitle()
         {
             for (int i = 0; i < gameOver.Length; i++)
@@ -58,6 +62,9 @@ namespace Display
                 Console.WriteLine(gameOver[i]);
             }
         }
+        /// <summary>
+        /// Affiche la variable recommencer
+        /// </summary>
         public void DrawRecommencer()
         {
             for (int i = 0; i < gameOver.Length; i++)
@@ -66,6 +73,9 @@ namespace Display
                 Console.WriteLine(recommencer[i]);
             }
         }
+        /// <summary>
+        /// Affiche la variable quitter
+        /// </summary>
         public void DrawQuitter()
         {
             for (int i = 0; i < gameOver.Length; i++)
@@ -74,6 +84,9 @@ namespace Display
                 Console.WriteLine(quitter[i]);
             }
         }
+        /// <summary>
+        /// Affiche la variable sendScore
+        /// </summary>
         public void SendScore()
         {
             for (int i = 0; i < gameOver.Length; i++)
