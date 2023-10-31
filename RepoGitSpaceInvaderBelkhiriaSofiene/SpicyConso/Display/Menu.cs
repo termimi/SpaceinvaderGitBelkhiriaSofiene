@@ -35,11 +35,15 @@
             @" ___/ / /__/ /_/ / /  /  __/",
             @"/____/\___/\____/_/   \___/ "
         };
+        // choix du joueur
         public int choix1 = 0;
         public Menu()
         {
             this.choix1 = 0;
         }
+        /// <summary>
+        /// Affiche la variable spaceInvader
+        /// </summary>
         public void DrawTitle()
         {
             for (int i = 0; i < spaceInvader.Length; i++)
@@ -48,6 +52,9 @@
                 Console.WriteLine(spaceInvader[i]);
             }
         }
+        /// <summary>
+        ///  Affiche la variable jouer
+        /// </summary>
         public void DrawJouer()
         {
             for (int i = 0; i < jouer.Length; i++)
@@ -56,6 +63,9 @@
                 Console.WriteLine(jouer[i]);
             }
         }
+        /// <summary>
+        ///  Affiche la variable classement
+        /// </summary>
         public void DrawClassemnt()
         {
             for (int i = 0; i < classement.Length; i++)
