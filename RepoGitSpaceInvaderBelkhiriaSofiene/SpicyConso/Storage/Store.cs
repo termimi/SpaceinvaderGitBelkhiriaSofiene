@@ -13,9 +13,9 @@ namespace Storage
         // Variable contenant les information de la DB et du serveur pour s'y connecter 
         public string connectionString = "Server=localhost;Port=6033;Database=db_space_invaders;User=root;Password=root;";
         // Variable contenant la requête SELECT à effectuer afin de connaitre les cinq meilleurs joueur du jeu
-        public string selection = "SELECT * FROM t_joueur ORDER BY jouNombrePoints DESC LIMIT 5;";
+        public string strSelection = "SELECT * FROM t_joueur ORDER BY jouNombrePoints DESC LIMIT 5;";
         // Variable contenant la requête d'insertion nécessaire à l'insertion du score du joueur
-        public string insertInTo = "INSERT INTO t_joueur(jouPseudo, jouNombrePoints) VALUES(@jouPseudo, @jouNombrePoints)";
+        public string strInsertInTo = "INSERT INTO t_joueur(jouPseudo, jouNombrePoints) VALUES(@jouPseudo, @jouNombrePoints)";
         // point du joueur
         public int intPoints;
         // nom du joueur
@@ -46,7 +46,7 @@ namespace Storage
                     // Vide la liste contenant les score
                     this.storageScore.Clear();
                     // Utilisation de MySqlCommand et de la variable selection afin d'exécuter la requête SELECT
-                    using (MySqlCommand command = new MySqlCommand(selection, connection))
+                    using (MySqlCommand command = new MySqlCommand(strSelection, connection))
                     {
                         // Utilisation de MySqlDataReader et de la variable commande afin d'exécuter une commande de lecture de donnée
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -105,7 +105,7 @@ namespace Storage
                     //début de la connexion
                     connection.Open();
                     // Utilisation de MySqlCommand et de la variable insertInTo afin d'exécuter la requête d'insertion
-                    using (MySqlCommand command = new MySqlCommand(insertInTo, connection))
+                    using (MySqlCommand command = new MySqlCommand(strInsertInTo, connection))
                     {
                         // ajout de la valeur strName dans la colonne jouPseudo de la DB
                         command.Parameters.AddWithValue("@jouPseudo", this.strName);
