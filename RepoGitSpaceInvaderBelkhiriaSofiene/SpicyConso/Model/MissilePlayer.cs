@@ -14,7 +14,9 @@ namespace Model
             //Position du missile en fonction du joueur
             this.missileX = player.playerX + 2;
             this.missileY = player.playerY;
+            // indique si le missile du joueru est lancer est lancer
             this.missileLaunched = missileLaunched;
+            // indique si le missile du joueur ont touché qqch
             this.missileTouched = missileTouched;
         }
         
