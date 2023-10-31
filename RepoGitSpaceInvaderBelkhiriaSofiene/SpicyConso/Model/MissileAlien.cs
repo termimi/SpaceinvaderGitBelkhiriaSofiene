@@ -4,8 +4,8 @@
     {
         public MissileAlien(Alien alien)
         {
-            this.missileX = alien.alienX;
-            this.missileY = alien.alienY;
+            this.x = alien.x;
+            this.y = alien.y;
             this.missileLaunched = missileLaunched;
         }
         /// <summary>
@@ -13,8 +13,8 @@
         /// </summary>
         public override void MissileUpdate()
         {
-            missileY++;
-            if (missileY == Console.WindowHeight)
+            y++;
+            if (y == Console.WindowHeight)
             {
                 missileLaunched = false;
             }

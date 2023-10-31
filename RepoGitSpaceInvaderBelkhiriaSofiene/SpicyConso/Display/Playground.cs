@@ -67,7 +67,7 @@ namespace Display
                 if (alien == null) return;
                 for (int i = 0; i < alienShape.Length; i++)
                 {
-                    Console.SetCursorPosition(alien.alienX, alien.alienY + i);
+                    Console.SetCursorPosition(alien.x, alien.y + i);
                     Console.WriteLine(alienShape[i]);
                 }
             }
@@ -82,7 +82,7 @@ namespace Display
             {
                 for (int i = 0; i < alienShape.Length; i++)
                 {
-                    Console.SetCursorPosition(alien.alienX, alien.alienY + i);
+                    Console.SetCursorPosition(alien.x, alien.y + i);
                     Console.WriteLine(boom[i]);
                 }
                 alien.deadDrawPassed = true;
@@ -97,7 +97,7 @@ namespace Display
             for (int i = 0; i < playerShape.Length; i++)
             {
 
-                Console.SetCursorPosition(player.playerX, player.playerY + i);
+                Console.SetCursorPosition(player.x, player.y + i);
                 Console.WriteLine(playerShape[i]);
             }
         }
@@ -111,7 +111,7 @@ namespace Display
             {
                 for (int i = 0; i < playerBoom.Length; i++)
                 {
-                    Console.SetCursorPosition(player.playerX, player.playerY + i);
+                    Console.SetCursorPosition(player.x, player.y + i);
                     Console.WriteLine(playerBoom[i]);
                 }
             }
@@ -125,7 +125,7 @@ namespace Display
             if (missile.missileLaunched)
             {
                 if (missile == null) return;
-                Console.SetCursorPosition(missile.missileX, missile.missileY);
+                Console.SetCursorPosition(missile.x, missile.y);
                 Console.Write("|");
 
             }
@@ -139,7 +139,7 @@ namespace Display
             if (missileAlien.missileLaunched)
             {
                 if (missileAlien == null) return;
-                Console.SetCursorPosition(missileAlien.missileX + 6, missileAlien.missileY);
+                Console.SetCursorPosition(missileAlien.x + 6, missileAlien.y);
                 Console.Write("|");
 
             }

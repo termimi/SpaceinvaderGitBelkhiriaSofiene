@@ -3,17 +3,17 @@
     public class Missile
     {
         //Position X du missile
-        public int missileX;
+        public int x;
         //Position y du missile
-        public int missileY;
+        public int y;
         //Indique si le missile à toucher une chose
         public bool missileTouched = false;
         //indique si le missile est lancer 
         public bool missileLaunched = false;
         public Missile()
         {
-            this.missileX = missileX;
-            this.missileY = missileY;
+            this.x = x;
+            this.y = y;
             this.missileLaunched = missileLaunched;
             this.missileTouched = missileTouched;
         }
@@ -22,8 +22,8 @@
         /// </summary>
         public virtual void MissileUpdate()
         {
-            missileY--;
-            if (missileY == 1)
+            y--;
+            if (y == 1)
             {
                 missileLaunched = false;
             }

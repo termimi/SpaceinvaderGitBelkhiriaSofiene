@@ -18,11 +18,11 @@ namespace Model
         /// <summary>
         /// Position sur l'axe X de l'alien
         /// </summary>
-        public int alienX;
+        public int x;
         /// <summary>
         /// Position sur l'axe Y de l'alien
         /// </summary>
-        public int alienY;
+        public int y;
         /// <summary>
         /// Variable qui dis si l'alien peut aller à droite
         /// </summary>
@@ -38,8 +38,8 @@ namespace Model
         /// <param name="alienY">Position Y de l'alien</param>
         public Alien(int alienX, int alienY)
         {
-            this.alienX = alienX;
-            this.alienY = alienY;
+            this.x = alienX;
+            this.y = alienY;
             this.deadDrawPassed = false;
         }
         /// <summary>
@@ -49,11 +49,11 @@ namespace Model
         {
             if (this.alienRight)
             {
-                alienX ++;
-                if (alienX == Console.WindowWidth - 32)
+                x ++;
+                if (x == Console.WindowWidth - 32)
                 {
                     this.alienRight = false;
-                    this.alienY += 4;
+                    this.y += 4;
                 }
             }
         }
@@ -64,11 +64,11 @@ namespace Model
         {
             if (!this.alienRight)
             {
-                this.alienX --;
-                if (this.alienX == 3)
+                this.x --;
+                if (this.x == 3)
                 {
                     this.alienRight = true;
-                    this.alienY += 4;
+                    this.y += 4;
                 }
             }
         }
@@ -100,7 +100,7 @@ namespace Model
         /// <param name="missillePlayerTouched">le missile du joueur</param>
         public void AlienTouched(MissilePlayer missillePlayerTouched)
         {
-            if((missillePlayerTouched.missileX >= this.alienX  && missillePlayerTouched.missileX <= this.alienX + 13) && (missillePlayerTouched.missileY == this.alienY))
+            if((missillePlayerTouched.x >= this.x  && missillePlayerTouched.x <= this.x + 13) && (missillePlayerTouched.y == this.y))
             {
                 this.alienDead = true;
                 missillePlayerTouched.missileTouched = true;

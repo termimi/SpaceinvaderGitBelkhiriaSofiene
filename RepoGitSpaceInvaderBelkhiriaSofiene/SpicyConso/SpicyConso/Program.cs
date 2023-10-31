@@ -239,7 +239,7 @@ while (true)
             {
                 alain.MoveRight();
                 alain.moveLeft();
-                if (alain.alienY == Console.WindowHeight - 4)
+                if (alain.y == Console.WindowHeight - 4)
                 {
                     player1.playerDead = true;
                 }
@@ -309,7 +309,7 @@ while (true)
         for (int i = missileAliens.Count - 1; i >= 0; i--)
         {
             MissileAlien munitionDefaut1 = missileAliens[i];
-            if (munitionDefaut1.missileY == Console.WindowHeight)
+            if (munitionDefaut1.y == Console.WindowHeight)
             {
 
                 missileAliens.RemoveAt(i);

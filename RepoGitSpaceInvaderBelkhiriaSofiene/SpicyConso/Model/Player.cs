@@ -11,9 +11,9 @@ namespace Model
         // Liste des missiles se trouvant dans le vaisseau du joueur
         List<MissilePlayer> missilePlayerPourChargement = new List<MissilePlayer>();
         // position x du joueur 
-        public int playerX;
+        public int x;
         // position y du joueur
-        public int playerY;
+        public int y;
         // indique si le joueur estau bord de la map
         public bool bord;
         // indique si le joueur est mort
@@ -21,8 +21,8 @@ namespace Model
                 
         public Player(int playerX, int playerY)
         {
-            this.playerX = playerX;
-            this.playerY = playerY;
+            this.x = playerX;
+            this.y = playerY;
             this.bord = false;
             this.playerDead = false;
         }
@@ -31,11 +31,11 @@ namespace Model
         /// </summary>
         public void moveRight()
         {
-            playerX++;
+            x++;
             //positionne le joueur tout à gauche de la map si il atteint 
-            if (playerX == Console.WindowWidth - 27)
+            if (x == Console.WindowWidth - 27)
             {
-                playerX = 13;
+                x = 13;
             }
         }
         /// <summary>
@@ -43,10 +43,10 @@ namespace Model
         /// </summary>
         public void moveLeft()
         {
-            playerX--;
-            if (playerX == 12)
+            x--;
+            if (x == 12)
             {
-                playerX = Console.WindowWidth-28;
+                x = Console.WindowWidth-28;
             }
         }
         /// <summary>
@@ -56,11 +56,11 @@ namespace Model
         {
             if(!bord)
             {
-                playerY--;
-                if(playerY == 0)
+                y--;
+                if(y == 0)
                     bord = true;
             }
-            if(playerY != 0)
+            if(y != 0)
                 bord=false;
         }
         /// <summary>
@@ -70,11 +70,11 @@ namespace Model
         {
             if (!bord)
             {
-                playerY++;
-                if (playerY == Console.WindowHeight -3)
+                y++;
+                if (y == Console.WindowHeight -3)
                     bord = true;
             }
-            if (playerY != Console.WindowHeight -3)
+            if (y != Console.WindowHeight -3)
                 bord = false;
         }
         /// <summary>
@@ -101,7 +101,7 @@ namespace Model
         /// <param name="missilleAlienTouched">position du missile enemi </param>
         public void PlayerTouched(MissileAlien missilleAlienTouched)
         {
-            if ((missilleAlienTouched.missileX >= this.playerX - 5 && missilleAlienTouched.missileX <= this.playerX ) && (missilleAlienTouched.missileY == this.playerY))
+            if ((missilleAlienTouched.x >= this.x - 5 && missilleAlienTouched.x <= this.x ) && (missilleAlienTouched.y == this.y))
             {
                  this.playerDead = true;
                 missilleAlienTouched.missileTouched = true;
