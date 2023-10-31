@@ -262,15 +262,18 @@ while (true)
                 }
             }
         }
-
+        // gére le le déplacement du missile du joueur + les colosions
         foreach (MissilePlayer munitionNormal in missilePlayer)
         {
+            // déplacement du missile du joueur
             if (frameNumber % 2 == 0)
                 munitionNormal.MissileUpdate();
+            //vérifie si un alien est touché
             foreach (Alien alain in enemi)
             {
                 alain.AlienTouched(munitionNormal);
             }
+            // retire les enemis si ils sont touché
             for (int i = enemi.Count - 1; i >= 0; i--)
             {
                 Alien alain = enemi[i];
@@ -286,6 +289,7 @@ while (true)
                 }
             }
         }
+        // retire les missile du joueur si il touche qqch ou qu'il sorte de l'écran
         for (int i = missilePlayer.Count - 1; i >= 0; i--)
         {
             MissilePlayer munitionNormal1 = missilePlayer[i];
@@ -294,14 +298,14 @@ while (true)
                 missilePlayer.RemoveAt(i);
             }
         }
+        // déplacement du missile de l'alien
         foreach (MissileAlien munitionDefaut in missileAliens)
         {
             if (frameNumber % 5 == 0)
                 munitionDefaut.MissileUpdate();
             player1.PlayerTouched(munitionDefaut);
-
-
         }
+        // retire les missile de l'alien si il touche qqch ou qui touche le bord du bas 
         for (int i = missileAliens.Count - 1; i >= 0; i--)
         {
             MissileAlien munitionDefaut1 = missileAliens[i];
@@ -313,6 +317,7 @@ while (true)
             if (munitionDefaut1.missileTouched)
                 missileAliens.RemoveAt(i);
         }
+        // sors du jeu si le joueur meurt
         if (player1.playerDead)
         {
             break;
@@ -320,6 +325,7 @@ while (true)
         // Timing
         Thread.Sleep(3);
     }
+    // Menu gameOver ne s'affiche que si le joueur est mort 
     if (player1.playerDead)
     {
         Console.Clear();
@@ -329,6 +335,7 @@ while (true)
             if (Console.KeyAvailable)
             {
                 keyPressed = Console.ReadKey(true);
+                // gère les choix du joueur
                 switch (keyPressed.Key)
                 {
                     case ConsoleKey.W:
@@ -356,31 +363,37 @@ while (true)
             gameOver.SendScore();
             Console.SetCursorPosition((Console.WindowWidth / 3), 55);
             Console.Write($"Votre score: {scores.intScore}");
+            // met le choix recommencer en rouge si le joueur est dessus
             if (gameOver.choix1 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 gameOver.DrawRecommencer();
             }
+            // met le choix quitter en rouge si le joueur est dessus
             if (gameOver.choix1 == 1)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 gameOver.DrawQuitter();
             }
+            // met le choix envoyer en rouge si le joueur est dessus
             if (gameOver.choix1 == 2)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 gameOver.SendScore();
             }
+            // recommence le jeu si le joueur le choisi
             if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 0)
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 player1.playerDead = false;
                 break; // Sort de la boucle si Enter est pressé et le choix vaut 0
             }
+            // sors du programme i le joueur le veut
             if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 1)
             {
                 Environment.Exit(0);
             }
+            // envoie du score si le joueur le veux
             if (keyPressed.Key == ConsoleKey.Enter && gameOver.choix1 == 2)
             {
                 Console.Clear();
@@ -388,9 +401,12 @@ while (true)
                 {
                     Console.Write("Merci de me donner votre pseudo puis d'appuier sur enter: ");
                     string nomJoueur = Console.ReadLine();
+                    // attribution du pseudo du joueur
                     scores.strName = nomJoueur;
                     Console.WriteLine();
+                    // envoie du score à la db
                     scores.sendScoreToDB();
+                    // sors de l'envoie si le joueur appui sur escape
                     while (true)
                     {
                         if (Console.KeyAvailable)
