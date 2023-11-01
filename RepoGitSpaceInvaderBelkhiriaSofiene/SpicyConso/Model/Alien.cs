@@ -49,7 +49,8 @@ namespace Model
         {
             if (this.alienRight)
             {
-                x ++;
+                x++;
+                int toto = Console.WindowWidth;
                 if (x == Console.WindowWidth - 32)
                 {
                     this.alienRight = false;
