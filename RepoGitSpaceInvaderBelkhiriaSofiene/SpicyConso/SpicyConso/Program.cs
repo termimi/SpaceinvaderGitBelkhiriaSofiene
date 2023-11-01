@@ -6,7 +6,10 @@ using Storage;
 Console.CursorVisible = false;
 Menu menu = new Menu();
 Store scores = new Store("", 0);
-ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+Console.SetCursorPosition(Console.WindowWidth/2, Console.WindowHeight/2);// refactor
+Console.WriteLine("Appuier sur une touche");// refactor
+ConsoleKeyInfo keyPressed = Console.ReadKey(true);// refactor
+Console.Clear();// refactor
 // indique si le joueur veut partire de la page score ou non
 bool escape = false;
 
@@ -153,6 +156,7 @@ while (true)
             // création des enemis
             for (int i = 0; i < manche * 3; i++)
             {
+                // décalage des ennemis en fonction du nombre d'ennemis 
                 x = i * 13;
                 if (i > 9)
                 {
