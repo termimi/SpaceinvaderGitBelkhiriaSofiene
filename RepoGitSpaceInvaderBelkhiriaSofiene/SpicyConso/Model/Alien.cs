@@ -31,6 +31,8 @@ namespace Model
         /// Variable qui dis si l'alien est considérer comme mort ou vivant
         /// </summary>
         public bool alienDead = false;
+        // largeur de l'écran
+        public const int SCREENWIDTH = 153;
         /// <summary>
         /// Constructeur de la classe alien
         /// </summary>
@@ -50,8 +52,7 @@ namespace Model
             if (this.alienRight)
             {
                 x++;
-                int toto = Console.WindowWidth;
-                if (x == Console.WindowWidth - 32)
+                if (x == SCREENWIDTH - 32)
                 {
                     this.alienRight = false;
                     this.y += 4;

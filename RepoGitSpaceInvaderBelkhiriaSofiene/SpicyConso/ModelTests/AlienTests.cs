@@ -17,12 +17,13 @@ namespace Model.Tests
             // arange
             int x = 5;
             int y = 10;
-            const int xBase = 5;
+            const int XBASE = 5;
             Alien alain = new Alien(x,y);
+           
             //act
             alain.MoveRight();
             //Assert
-            Assert.IsTrue(x == xBase +1);
+            Assert.IsTrue(alain.x == XBASE + 1);
         }
     }
 }
