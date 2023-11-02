@@ -38,8 +38,24 @@ namespace Model.Tests
             {
                 alain.MoveRight();
             }
-           //Assert
+            //Assert
             Assert.IsFalse(!alain.alienRight);
+        }
+
+        [TestMethod()]
+        public void MisilleLaunchAlienTest()
+        {
+            // arange
+            int x = 5;
+            int y = 10;
+            const int XBASE = 5;
+            Alien alain = new Alien(x, y);
+            MissileAlien missileAlien = new MissileAlien(alain);
+            //act
+            alain.ChargementAlien(missileAlien);
+            alain.MisilleLaunchAlien(missileAlien);
+            //Assert
+            Assert.IsTrue(missileAlien.missileLaunched);
         }
     }
 }
