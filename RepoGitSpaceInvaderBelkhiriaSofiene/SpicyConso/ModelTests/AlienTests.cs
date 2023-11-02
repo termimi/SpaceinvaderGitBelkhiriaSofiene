@@ -34,12 +34,12 @@ namespace Model.Tests
             const int XBASE = 5;
             Alien alain = new Alien(x, y);
             //act
-            while (alain.x > Alien.SCREENWIDTH - 32)
+            while (alain.x < Alien.SCREENWIDTH - 32)
             {
                 alain.MoveRight();
             }
             //Assert
-            Assert.IsFalse(!alain.alienRight);
+            Assert.IsFalse(alain.alienRight);
         }
 
         [TestMethod()]

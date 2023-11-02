@@ -2,6 +2,7 @@
 {
     public class MissileAlien : Missile
     {
+        public const int SCREENHEIGHT = 40;
         public MissileAlien(Alien alien)
         {
             this.x = alien.x;
@@ -14,7 +15,7 @@
         public override void MissileUpdate()
         {
             y++;
-            if (y == Console.WindowHeight)
+            if (y == SCREENHEIGHT)
             {
                 missileLaunched = false;
             }
