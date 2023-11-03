@@ -21,22 +21,21 @@
             @"/ /_/ / /_/ / /_/ /  __/ /    ",
             @"\____/\____/\__,_/\___/_/     ",
         };
-        public string[] option =
-        {
-            @"   ____        __  _           ",
-            @"  / __ \____  / /_(_)___  ____ ",
-            @" / / / / __ \/ __/ / __ \/ __ \",
-            @"/ /_/ / /_/ / /_/ / /_/ / / / /",
-            @"\____/ .___/\__/_/\____/_/ /_/ ",
-            @"    /_/                        "
-        };
-        public string[] classement =
+        public string[] score =
         {
             @"   _____                    ",
             @"  / ___/_________  ________ ",
             @"  \__ \/ ___/ __ \/ ___/ _ \",
             @" ___/ / /__/ /_/ / /  /  __/",
             @"/____/\___/\____/_/   \___/ "
+        };
+        public string[] classement =
+        {
+            @"   ____ _        _    ____ ____  _____ __  __ _____ _   _ _____ ",
+            @"  / ___| |      / \  / ___/ ___|| ____|  \/  | ____| \ | |_   _|",
+            @" | |   | |     / _ \ \___ \___ \|  _| | |\/| |  _| |  \| | | |  ",
+            @" | |___| |___ / ___ \ ___) |__) | |___| |  | | |___| |\  | | |  ",
+            @"  \____|_____/_/   \_\____/____/|_____|_|  |_|_____|_| \_| |_|  ",
         };
         // choix du joueur
         public int choix1 = 0;
@@ -67,13 +66,24 @@
             }
         }
         /// <summary>
-        ///  Affiche la variable classement
+        ///  Affiche la variable score
         /// </summary>
         public void DrawClassemnt()
         {
             for (int i = 0; i < classement.Length; i++)
             {
                 Console.SetCursorPosition((Console.WindowWidth / 3), 15+ i);
+                Console.WriteLine(score[i]);
+            }
+        }
+        /// <summary>
+        ///  Affiche la variable classement
+        /// </summary>
+        public void DrawClassementInClassement()
+        {
+            for (int i = 0; i < classement.Length; i++)
+            {
+                Console.SetCursorPosition((Console.WindowWidth / 4), 5+i);
                 Console.WriteLine(classement[i]);
             }
         }

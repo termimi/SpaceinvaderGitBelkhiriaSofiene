@@ -74,6 +74,8 @@ do
         while (true)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            menu.DrawClassementInClassement();
             // Prend les 5 meilleurs joueurs
             scores.StoreDbResult();
             // attribue le résulat de loadingDbResult à une nouvelle liste 
@@ -81,8 +83,8 @@ do
             //Affiche le nom et les point de la liste scoreList
             foreach (Store store in scoresList)
             {
-                Console.SetCursorPosition(Console.WindowWidth / 2, i);
-                Console.WriteLine(store.strName + " " + store.intPoints);
+                Console.SetCursorPosition(Console.WindowWidth / 3, 8+i);
+                Console.WriteLine(i - 4 + "." +" " + store.strName + " " + store.intPoints) ;
                 i++;
             }
             // Bloque l'affichage du score 

@@ -48,6 +48,7 @@ namespace Display
             @" |_____/ \___|_| |_|\__,_| |_____/ \___\___/|_|  \___|"
            
         };
+        
         // variable contenant le choix du joueur
         public int choix1 = 0;
         public GameOverMenu()
