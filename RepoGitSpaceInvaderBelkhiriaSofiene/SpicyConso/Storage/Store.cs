@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 namespace Storage
 {
+    /// <summary>
+    /// Classe permettant au programe de se connecter à la base de donnée MySql afin d'afficher et de stocker les score des joueurs
+    /// </summary>
     public class Store
     {
         // Liste contenant le résulat du SELECT 
