@@ -1,5 +1,8 @@
 ﻿namespace Model
 {
+    /// <summary>
+    /// Classe contenant les information et le déplacement des missiles envoyés par les aliens
+    /// </summary>
     public class MissileAlien : Missile
     {
         public const int SCREENHEIGHT = 40;

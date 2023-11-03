@@ -2,6 +2,9 @@
 
 namespace Display
 {
+    /// <summary>
+    /// Classe contenant tout ce qui concerne l'affichage du jeu
+    /// </summary>
     public class Playground
     {
         //Forme de l'alien

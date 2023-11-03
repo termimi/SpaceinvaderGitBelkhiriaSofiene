@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    /// <summary>
+    /// Classe contanant toutes les informations sur le joueur ainsi que les actions qu'il peut réaliser
+    /// </summary>
     public class Player
     {
         // Liste des missiles se trouvant dans le vaisseau du joueur

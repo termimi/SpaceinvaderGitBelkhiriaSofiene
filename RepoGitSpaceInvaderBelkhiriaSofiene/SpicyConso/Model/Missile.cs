@@ -1,5 +1,8 @@
 ﻿namespace Model
 {
+    /// <summary>
+    /// Classe contenant les cractéristique principale des missiles du jeu ainsi que leur déplacement par défaut
+    /// </summary>
     public class Missile
     {
         //Position X du missile

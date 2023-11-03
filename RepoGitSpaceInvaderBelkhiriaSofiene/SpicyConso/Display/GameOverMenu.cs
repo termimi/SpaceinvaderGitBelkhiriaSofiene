@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Display
 {
+    /// <summary>
+    /// Classe contenant les variable composant le Menu game over anisi que les methodes d'affichage
+    /// </summary>
     public class GameOverMenu
     {
         public string[] gameOver =

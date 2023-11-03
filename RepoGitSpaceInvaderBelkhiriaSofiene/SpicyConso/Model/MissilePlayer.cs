@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    /// <summary>
+    /// Classe contenant les information et le déplacement des missiles envoyés par le joueur
+    /// </summary>
     public class MissilePlayer:Missile
     {
         public MissilePlayer(Player player)

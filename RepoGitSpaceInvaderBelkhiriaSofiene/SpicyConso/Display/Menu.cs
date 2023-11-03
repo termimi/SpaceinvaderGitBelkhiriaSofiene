@@ -1,5 +1,8 @@
 ﻿namespace Display
 {
+    /// <summary>
+    /// Classe contenant les variable composant le Menu principale du jeu anisi que les methodes d'affichage
+    /// </summary>
     public class Menu
     {
         public string[] spaceInvader =

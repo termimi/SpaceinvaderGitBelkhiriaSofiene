@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    /// <summary>
+    /// Classe contanant toutes les informations sur les aliens du jeu ainsi que les actions qu'ils peuvent réaliser
+    /// </summary>
     public class Alien
     {
         
