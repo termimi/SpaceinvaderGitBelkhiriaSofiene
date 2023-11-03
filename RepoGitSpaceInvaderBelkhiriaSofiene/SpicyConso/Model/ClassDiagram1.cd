@@ -1,41 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Model.Alien" Collapsed="true">
-    <Position X="7.25" Y="2.25" Width="1.5" />
+  <Class Name="Model.Alien">
+    <Position X="5.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CEAAAgAAAAAAAAAQAAAQQAAAABAAAAAAQAAACAAAAAA=</HashCode>
+      <HashCode>CEAAAgAAAAAAAAAQAAAQQAAAAAQAAAAAQABgCAAAAAA=</HashCode>
       <FileName>Alien.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Model.Missile" Collapsed="true">
-    <Position X="10.5" Y="2.25" Width="1.5" />
+  <Class Name="Model.Missile">
+    <Position X="11.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAIAAAAAAAAAAAAgAQAAAAABAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAQAAAAABBgAAAAAAA=</HashCode>
       <FileName>Missile.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Model.MissileAlien" Collapsed="true">
-    <Position X="9.75" Y="4" Width="1.5" />
+  <Class Name="Model.MissileAlien">
+    <Position X="10" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABAAAAAAAAA=</HashCode>
       <FileName>MissileAlien.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Model.MissilePlayer" Collapsed="true">
-    <Position X="12" Y="3.75" Width="1.5" />
+  <Class Name="Model.MissilePlayer">
+    <Position X="13.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MissilePlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Model.Player">
-    <Position X="6" Y="3.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+    <Position X="8" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAEAAAAAgAAgAAAAAAAABAAAACMCAAQQ=</HashCode>
+      <HashCode>AAAAAAABAAAAAEAAAAAgAAgAAAAAAAABAABgCMAAAAQ=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
